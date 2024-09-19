@@ -1,7 +1,7 @@
 # comp sci 30
 
 ## Demos
-- moving square
+- [Moving Square](moving-square)
 
 ## Projects
 
