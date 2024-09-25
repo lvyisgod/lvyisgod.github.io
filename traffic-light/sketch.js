@@ -63,3 +63,13 @@ function colors(){
     return "red"
   }
 }
+
+function makeCircles(color){
+  if (color === "green"){
+    fill("green")
+  ellipse(width/2, height/2 - 65, 50, 50);
+  fill("Black")
+  ellipse(width/2, height/2, 50, 50);
+  ellipse(width/2, height/2 + 65, 50, 50);
+  }
+}
