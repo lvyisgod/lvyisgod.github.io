@@ -1,24 +1,40 @@
 // Interactive Scene
 // Demo
-
+let rowLength = 3;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  console.log(searchXandY(0, 1, 5));
 }
 
 function draw() {
   background(0);
-  circle(mouseX, mouseY, 100)
+  circle(mouseX, mouseY, 100);
 }
 
-const arrX = [1, 2, 3];
-const arrY = [arrX, arrX, arrX];
-console.log(arrY);
-console.log(arrY[2] && arrX[2]);
+let matrix2d = [
+  [0, 2, 0],
+  [0, 5, 0],
+  [0, 0, 0]
+];
+console.log(matrix2d[0][1]);
 
-for (let i = 0; i < arrY.length; i++){
-  console.log(arrY[i]);
-  for (let x = 0; x < arrX.length; x++){
-    console.log 
+function searchXandY(colume, row, numToFind){
+  let SearchY = true;
+  for (let times = 1; times < 2; times++){
+    for (let length = 0; length < rowLength; length++){
+      if (SearchY){
+        if (numToFind === matrix2d[row][length]){
+          return true;
+        }
+      }
+      else {
+        if (numToFind === matrix2d[length][colume]){
+          return true;
+        }
+      }
+    }
+    !SearchY;
   }
+  return false;
 }

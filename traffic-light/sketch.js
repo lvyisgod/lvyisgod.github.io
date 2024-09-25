@@ -26,64 +26,43 @@ function drawOutlineOfLights() {
   rect(width/2, height/2, 75, 200, 10);
 
   //lights
-  checkColor()
-  makeCircles(colors())
+  checkColor();
+  makeCircle();
 }
 
 function checkColor(){
-  if (millis() > lastSwitch + timeSwap && color === 2){
-    color = 0
-    timeSwap = 1200
-    lastSwitch = millis()
+  if (millis() > lastSwitch + timeSwap && colorz === 2){
+    colorz = 0;
+    timeSwap = 1200;
+    lastSwitch = millis();
   }
 
-  else if (millis() > lastSwitch + timeSwap && color === 0){
-    color = 1
-    timeSwap = 2000
-    lastSwitch = millis()
+  else if (millis() > lastSwitch + timeSwap && colorz === 0){
+    colorz = 1;
+    timeSwap = 2000;
+    lastSwitch = millis();
   }
 
-  else if (millis() > lastSwitch + timeSwap && color === 1){
-    color = 2
-    lastSwitch = millis()
+  else if (millis() > lastSwitch + timeSwap && colorz === 1){
+    colorz = 2;
+    timeSwap = 2000;
+    lastSwitch = millis();
   }
 }
 
-function colors(){
+function makeCircle(){
   if (colorz === 0){
-    return "green"
-  }
-  else if (colorz === 1){
-    return "yellow"
-  }
-  else {
-    return "red"
-  }
-}
-
-function makeCircles(color){
-  if (color === "green"){
     fill("green"); 
-     ellipse(width/2, height/2 - 65, 50, 50);
-   fill("black");
-    ellipse(width/2, height/2, 50, 50);
-   ellipse(width/2, height/2 + 65, 50, 50);
+    ellipse(width/2, height/2 - 65, 50, 50);
   }
 
-  if (color === "yellow"){
-    fill("black");
-    ellipse(width/2, height/2 - 65, 50, 50);
-   fill("green"); 
+  if (colorz === 1){
+    fill("yellow"); 
     ellipse(width/2, height/2, 50, 50);
-    fill("black");
-   ellipse(width/2, height/2 + 65, 50, 50);
   }
 
   else{
-    fill("black");
-    ellipse(width/2, height/2 - 65, 50, 50);
-    ellipse(width/2, height/2, 50, 50);
-   fill("red");
-   ellipse(width/2, height/2 + 65, 50, 50);
+    fill("red");
+    ellipse(width/2, height/2 + 65, 50, 50);
   }
 }
