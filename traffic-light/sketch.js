@@ -6,7 +6,7 @@
 // changing according to time. You may want to investigate the millis()
 // function at https://p5js.org/reference/#/p5/millis
 
-let color = 2;
+let colorz = 2;
 let lastSwitch = 0;
 let timeSwap = 2000;
 
@@ -27,22 +27,19 @@ function drawOutlineOfLights() {
 
   //lights
   checkColor()
-  fill(colors())
-  ellipse(width/2, height/2 - 65, 50, 50); //top
-  ellipse(width/2, height/2, 50, 50); //middle
-  ellipse(width/2, height/2 + 65, 50, 50); //bottom
+  makeCircles(colors())
 }
 
 function checkColor(){
   if (millis() > lastSwitch + timeSwap && color === 2){
     color = 0
-    timeswap = 1200
+    timeSwap = 1200
     lastSwitch = millis()
   }
 
   else if (millis() > lastSwitch + timeSwap && color === 0){
     color = 1
-    timeswap = 2000
+    timeSwap = 2000
     lastSwitch = millis()
   }
 
@@ -53,10 +50,10 @@ function checkColor(){
 }
 
 function colors(){
-  if (color === 0){
+  if (colorz === 0){
     return "green"
   }
-  else if (color === 1){
+  else if (colorz === 1){
     return "yellow"
   }
   else {
@@ -66,10 +63,27 @@ function colors(){
 
 function makeCircles(color){
   if (color === "green"){
-    fill("green")
-  ellipse(width/2, height/2 - 65, 50, 50);
-  fill("Black")
-  ellipse(width/2, height/2, 50, 50);
-  ellipse(width/2, height/2 + 65, 50, 50);
+    fill("green"); 
+     ellipse(width/2, height/2 - 65, 50, 50);
+   fill("black");
+    ellipse(width/2, height/2, 50, 50);
+   ellipse(width/2, height/2 + 65, 50, 50);
+  }
+
+  if (color === "yellow"){
+    fill("black");
+    ellipse(width/2, height/2 - 65, 50, 50);
+   fill("green"); 
+    ellipse(width/2, height/2, 50, 50);
+    fill("black");
+   ellipse(width/2, height/2 + 65, 50, 50);
+  }
+
+  else{
+    fill("black");
+    ellipse(width/2, height/2 - 65, 50, 50);
+    ellipse(width/2, height/2, 50, 50);
+   fill("red");
+   ellipse(width/2, height/2 + 65, 50, 50);
   }
 }
