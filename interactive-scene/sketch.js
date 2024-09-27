@@ -5,7 +5,8 @@ let rowLength = 3;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  console.log(searchXandY(1, 0, 2));
+  makeGame(easymode);
+  console.log(easymode);
 }
 
 function draw() {
@@ -13,32 +14,37 @@ function draw() {
   circle(mouseX, mouseY, 100);
 }
 
-let matrix2d = [
-  [0, 2, 0],
-  [0, 0, 3],
+let easymode = [
+  [0, 0, 0],
+  [0, 0, 0],
   [0, 0, 0]
 ];
-console.log(matrix2d[0][1]);
+easymode[2][1] = 2;
 
-function searchXandY(colume, row, numToFind){
+function searchXandY(colume, row, numToFind, easyOrHard){
   let searchY = true;
-  for (let times = 1; times < 3; times++){
+  for (let times = 0; times < 2; times++){
     for (let length = 0; length < rowLength; length++){
       if (searchY){
-        console.log(matrix2d[row][length])
-        console.log((matrix2d[row][length] === matrix2d[colume][row]))
-        if ((numToFind === matrix2d[row][length]) && (matrix2d[row][length] === matrix2d[colume][row])){
+        if (numToFind === easyOrHard[row][length] && length !== row){
           return true;
         }
       }
       else {
-        console.log(matrix2d[length][colume])
-        if ((numToFind === matrix2d[length][colume]) && (matrix2d[length][colume] === matrix2d[colume][row])){
+        if (numToFind === easyOrHard[length][colume] && length !== colume){
           return true;
         }
       }
     }
-    searchY = false
+    searchY = false;
   }
   return false;
+}
+
+function makeGame(easyOrHard){
+  for (let x = 0; x < 1; x++){
+    for (let y = 0; y < 2; x++){
+      console.log[x, y];
+    }
+  }
 }
