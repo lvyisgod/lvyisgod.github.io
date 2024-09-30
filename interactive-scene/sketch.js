@@ -20,12 +20,12 @@ function draw() {
 }
 
 function drawGameBoard(){
-  for (let x = 0; x < windowWidth; x += windowWidth / rowLength) {
-    for (let y = 0; y < windowHeight; y += windowHeight / rowLength) {
-      square(x, y, windowWidth / 2);
-      text(gameBoard[0][1], x+windowWidth/(rowLength*2), y-windowWidth/(rowLength*2))
-    }
-  }
+  // for (let x = 0; x < windowWidth; x += windowWidth / rowLength) {
+  //   for (let y = 0; y < windowHeight; y += windowHeight / rowLength) {
+  //     square(x, y, windowWidth / 2);
+  //     text(gameBoard[0][1], x+windowWidth/(rowLength*2), y-windowWidth/(rowLength*2))
+  //   }
+  // }
 }
 
 
