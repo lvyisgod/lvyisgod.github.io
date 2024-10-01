@@ -24,13 +24,13 @@ let randomBoards = [
   [3, 2, 1],
   [2, 1, 3],
   [1, 3, 2]
-]
+];
 
 // setting up the rowlength, random pick and bulean and the orignal numSize
 const rowLength = 3;
 let randomPick;
 let randomTrueOrFalse;
-let numSize = 90
+let numSize = 90;
 
 // Instlizing all the numbers to be false
 let firstNum = false;
@@ -47,16 +47,16 @@ let ninthNum = false;
 // and also make a random bulean true or false
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  randomPick = round(random(4))*3
-  randomTrueOrFalse = randomizeTrueOrFalse()
+  randomPick = round(random(4))*3;
+  randomTrueOrFalse = randomizeTrueOrFalse();
 }
 
 // This will draw the background white then drawSquares then drawNumbers and then numReveal
 function draw() {
   background(0);
-  drawSquares()
-  drawNumbers()
-  numReveal()                   
+  drawSquares();
+  drawNumbers();
+  numReveal();                   
 }
 
 //  This function draws the grid of squares for the numbers to go into
@@ -78,92 +78,94 @@ function drawNumbers(){
     for (let row = 0; row < rowLength; row++){
       textSize(numSize);
       if (!hideFirstNum){
-        text(randomBoards[colume][row], windowWidth/6 + (windowWidth/3 * row) - 30, windowHeight/6 + (windowHeight/3 * counter) + 20);
+        text(randomBoards[colume][row], windowWidth/6 + windowWidth/3 * row - 30, windowHeight/6 + windowHeight/3 * counter + 20);
       }
-      hideFirstNum = !hideFirstNum
+      hideFirstNum = !hideFirstNum;
     }
-    counter += 1
+    counter += 1;
   }
 }
 
 // Making a function that changes the numSize based on the mouse wheel going up or down
 function mouseWheel(event) {
   if (event.delta < 0) {
-    numSize -= 2
+    numSize -= 2;
   } 
   else{
-    numSize += 2
+    numSize += 2;
   }
 }
 
 // This function will randomize a boolean to be eather true or false
 function randomizeTrueOrFalse(){
-  randomTrueOrFalse = round(random(1))
-  if (randomTrueOrFalse === 0)
-   {return true}
-  else
-    {return false}
+  randomTrueOrFalse = round(random(1));
+  if (randomTrueOrFalse === 0) {
+    return true;
+  }
+  else {
+    return false;
+  }
 }
 
 // This function will ask if a square has been clicked and if you are clicking the right box and the right number on the keyboard if so if will make the corresponeding number true
 function mouseClicked(){
-  if ((mouseX > 0 && mouseX < windowWidth/3) && (mouseY > 0 && mouseY < windowHeight/3) && (randomTrueOrFalse) && (keyIsDown(getNumToKeyCodes(0, 0)))){
-        firstNum = true;
+  if (mouseX > 0 && mouseX < windowWidth/3 && (mouseY > 0 && mouseY < windowHeight/3) && randomTrueOrFalse && keyIsDown(getNumToKeyCodes(0, 0))){
+    firstNum = true;
   }
-  if ((mouseX > windowWidth/3 && mouseX < (windowWidth/3)*2) && (mouseY > 0 && mouseY < windowHeight/3) && (!randomTrueOrFalse) && (keyIsDown(getNumToKeyCodes(0, 1)))){
-      secondNum = true;
+  if (mouseX > windowWidth/3 && mouseX < windowWidth/3*2 && (mouseY > 0 && mouseY < windowHeight/3) && !randomTrueOrFalse && keyIsDown(getNumToKeyCodes(0, 1))){
+    secondNum = true;
   }
-  if ((mouseX > (windowWidth/3)*2 && mouseX < windowWidth) && (mouseY > 0 && mouseY < windowHeight/3) && (randomTrueOrFalse) && (keyIsDown(getNumToKeyCodes(0, 2)))){
-      thirdNum = true;
+  if (mouseX > windowWidth/3*2 && mouseX < windowWidth && (mouseY > 0 && mouseY < windowHeight/3) && randomTrueOrFalse && keyIsDown(getNumToKeyCodes(0, 2))){
+    thirdNum = true;
   }
-  if ((mouseX > 0 && mouseX < windowWidth/3) && (mouseY > windowHeight/3 && mouseY < (windowHeight/3)*2) && (!randomTrueOrFalse) && (keyIsDown(getNumToKeyCodes(1, 0)))){
-      fourthNum = true;
+  if (mouseX > 0 && mouseX < windowWidth/3 && (mouseY > windowHeight/3 && mouseY < windowHeight/3*2) && !randomTrueOrFalse && keyIsDown(getNumToKeyCodes(1, 0))){
+    fourthNum = true;
   }
-  if ((mouseX > windowWidth/3 && mouseX < (windowWidth/3)*2) && (mouseY > windowHeight/3 && mouseY < (windowHeight/3)*2) && (randomTrueOrFalse) && (keyIsDown(getNumToKeyCodes(1, 1)))){
+  if (mouseX > windowWidth/3 && mouseX < windowWidth/3*2 && (mouseY > windowHeight/3 && mouseY < windowHeight/3*2) && randomTrueOrFalse && keyIsDown(getNumToKeyCodes(1, 1))){
     fifthNum = true;
   }
-  if ((mouseX > (windowWidth/3)*2 && mouseX < windowWidth) && (mouseY > windowHeight/3 && mouseY < (windowHeight/3)*2) && (!randomTrueOrFalse) && (keyIsDown(getNumToKeyCodes(1, 2)))){
+  if (mouseX > windowWidth/3*2 && mouseX < windowWidth && (mouseY > windowHeight/3 && mouseY < windowHeight/3*2) && !randomTrueOrFalse && keyIsDown(getNumToKeyCodes(1, 2))){
     sixthNum = true;
   }
-  if ((mouseX > 0 && mouseX < windowWidth/3) && (mouseY > (windowHeight/3)*2 && mouseY < windowHeight) && (randomTrueOrFalse) && (keyIsDown(getNumToKeyCodes(2, 0)))){
+  if (mouseX > 0 && mouseX < windowWidth/3 && (mouseY > windowHeight/3*2 && mouseY < windowHeight) && randomTrueOrFalse && keyIsDown(getNumToKeyCodes(2, 0))){
     seventhNum = true;
   }
-  if ((mouseX > windowWidth/3 && mouseX < (windowWidth/3)*2) && (mouseY > (windowHeight/3)*2 && mouseY < windowHeight) && (!randomTrueOrFalse) && (keyIsDown(getNumToKeyCodes(2, 1)))){
+  if (mouseX > windowWidth/3 && mouseX < windowWidth/3*2 && (mouseY > windowHeight/3*2 && mouseY < windowHeight) && !randomTrueOrFalse && keyIsDown(getNumToKeyCodes(2, 1))){
     eighthNum = true;
   }
-  if ((mouseX > (windowWidth/3)*2 && mouseX < windowWidth) && (mouseY > (windowHeight/3)*2 && mouseY < windowHeight) && (randomTrueOrFalse) && (keyIsDown(getNumToKeyCodes(2, 2)))){
+  if (mouseX > windowWidth/3*2 && mouseX < windowWidth && (mouseY > windowHeight/3*2 && mouseY < windowHeight) && randomTrueOrFalse && keyIsDown(getNumToKeyCodes(2, 2))){
     ninthNum = true;
-}
+  }
 }
 
 // If a number has been made true this will draw the number in the right spot that the number is suppost to be in
 function numReveal(){
   if (firstNum){
-    text(randomBoards[randomPick][0], windowWidth/6 - 30, windowHeight/6 + 20)
+    text(randomBoards[randomPick][0], windowWidth/6 - 30, windowHeight/6 + 20);
   }
   if (secondNum){
-    text(randomBoards[randomPick][1], windowWidth/2 - 30, windowHeight/6 + 20)
+    text(randomBoards[randomPick][1], windowWidth/2 - 30, windowHeight/6 + 20);
   }
   if (thirdNum){
-    text(randomBoards[randomPick][2], (windowWidth/6)*5 - 30, windowHeight/6 + 20)
+    text(randomBoards[randomPick][2], windowWidth/6*5 - 30, windowHeight/6 + 20);
   }
   if (fourthNum){
-    text(randomBoards[randomPick+1][0], windowWidth/6 - 30, windowHeight/2 + 20)
+    text(randomBoards[randomPick+1][0], windowWidth/6 - 30, windowHeight/2 + 20);
   }
   if (fifthNum){
-    text(randomBoards[randomPick+1][1], windowWidth/2 - 30, windowHeight/2 + 20)
+    text(randomBoards[randomPick+1][1], windowWidth/2 - 30, windowHeight/2 + 20);
   }
   if (sixthNum){
-    text(randomBoards[randomPick+1][2], (windowWidth/6)*5 - 30, windowHeight/2 + 20)
+    text(randomBoards[randomPick+1][2], windowWidth/6*5 - 30, windowHeight/2 + 20);
   }
   if (seventhNum){
-    text(randomBoards[randomPick+2][0], windowWidth/6 - 30, (windowHeight/6) * 5 + 20)
+    text(randomBoards[randomPick+2][0], windowWidth/6 - 30, windowHeight/6 * 5 + 20);
   }
   if (eighthNum){
-    text(randomBoards[randomPick+2][1], windowWidth/2 - 30, (windowHeight/6) * 5 + 20)
+    text(randomBoards[randomPick+2][1], windowWidth/2 - 30, windowHeight/6 * 5 + 20);
   }
   if (ninthNum){
-    text(randomBoards[randomPick+2][2], (windowWidth/6)*5 - 30, (windowHeight/6) * 5 + 20)
+    text(randomBoards[randomPick+2][2], windowWidth/6*5 - 30, windowHeight/6 * 5 + 20);
   }
 }
 
@@ -173,9 +175,9 @@ function getNumToKeyCodes(numToAddToRandomPick, row){
     return 49;
   }
   if (randomBoards[randomPick+numToAddToRandomPick][row] === 2){
-    return 50
+    return 50;
   }
   else{
-    return 51
+    return 51;
   }
 }
