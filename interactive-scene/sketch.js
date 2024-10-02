@@ -1,7 +1,11 @@
 // Interactive Scene, Sudoku
 // Caylixx, Starr
 // Sept 30, 2024
+
+// Goal: To make a suduku game that can cycle through game boards
+
 // Wow Me factor: adding the numbers being able to be resized with a scroll wheel on the mouse by moxing it up or down
+
 
 // This is Instilizing all the games boards it will randomly choses from
 let randomBoards = [
@@ -26,14 +30,20 @@ let randomBoards = [
   [1, 3, 2]
 ];
 
+
 // setting up the game state
 let gameState = "start";
 
-// setting up the rowlength, random pick and boolean and the orignal numSize
+
+// setting up the rowlength, random pick and boolean and the orignal numSize and bgColor
 const rowLength = 3;
+
 let randomPick;
 let randomTrueOrFalse;
+
 let numSize = 90;
+let bgColor = "lightblue";
+
 
 // Instlizing all the numbers to be false
 let firstNum = false;
@@ -56,26 +66,60 @@ function setup() {
   randomTrueOrFalse = randomizeTrueOrFalse();
 }
 
-function draw() {
-  // This will draw the background white then drawSquares then drawNumbers and then numReveal
 
-  background(0);
-  if (gameState === "start"){
-    text("Sudoku", windowWidth/2, windowHeight/3);
+function draw() {
+  // This will draw the background then do the functions in what the Game State is now
+
+  background(bgColor);
+
+  if (gameState === "start"){ // Start Screen
+    displayStartText();
   }
-  if (gameState === "inGame"){
+
+  if (gameState === "inGame"){ // Game Screen
     drawSquares();
     drawNumbers();
     numReveal();
+    isGameWon();
   }
-  
-  // if (gameState === "win"){
 
-  // }
+  if (gameState === "win"){ // Win Screen
+    displayWinText();
+  }
+}
 
-  // if (gameState === "loss"){
 
-  // }
+function randomizeTrueOrFalse(){
+  // This function will randomize a boolean to be eather true or false
+
+  randomTrueOrFalse = round(random(1));
+  if (randomTrueOrFalse === 0) {
+    return true;
+  }
+  else {
+    return false;
+  }
+}
+
+
+function keyPressed() {
+  // This will make the start screen go into the game screen when space is pressed
+
+  if (keyCode === 32) {
+    if (gameState === "start"){
+      gameState = "inGame";
+    }
+  }
+}
+
+
+function displayStartText(){
+  // This function will show to start screen text
+
+  textSize(100);
+  text("Sudoku", windowWidth/2.5, windowHeight/3);
+  textSize(50);
+  text ("Press Space to start game", windowWidth/3, windowHeight/2);
 }
 
 
@@ -109,32 +153,9 @@ function drawNumbers(){
   }
 }
 
-function mouseWheel(event) {
-  // Making a function that changes the numSize based on the mouse wheel going up or down
-
-  if (event.delta < 0) {
-    numSize -= 2;
-  } 
-  else{
-    numSize += 2;
-  }
-}
-
-function randomizeTrueOrFalse(){
-  // This function will randomize a boolean to be eather true or false
-
-  randomTrueOrFalse = round(random(1));
-  if (randomTrueOrFalse === 0) {
-    return true;
-  }
-  else {
-    return false;
-  }
-}
 
 function mouseClicked(){
   // This function will ask if a square has been clicked and if you are clicking the right box and the right number on the keyboard if so if will make the corresponeding number true
-
 
   if (mouseX > 0 && mouseX < windowWidth/3 && (mouseY > 0 && mouseY < windowHeight/3) && randomTrueOrFalse && keyIsDown(getNumToKeyCodes(0, 0))){
     firstNum = true;
@@ -162,6 +183,21 @@ function mouseClicked(){
   }
   if (mouseX > windowWidth/3*2 && mouseX < windowWidth && (mouseY > windowHeight/3*2 && mouseY < windowHeight) && randomTrueOrFalse && keyIsDown(getNumToKeyCodes(2, 2))){
     ninthNum = true;
+  }
+}
+
+
+function getNumToKeyCodes(numToAddToRandomPick, row){
+  // This function will ask the colume by doing random pick + the number to add to it and will ask the row and after finding out what number it is it will return the number code
+
+  if (randomBoards[randomPick+numToAddToRandomPick][row] === 1){
+    return 49;
+  }
+  if (randomBoards[randomPick+numToAddToRandomPick][row] === 2){
+    return 50;
+  }
+  else{
+    return 51;
   }
 }
 
@@ -199,16 +235,37 @@ function numReveal(){
 }
 
 
-function getNumToKeyCodes(numToAddToRandomPick, row){
-  // This function will ask the colume by doing random pick + the number to add to it and will ask the row and after finding out what number it is it will return the number code
+function isGameWon(){
+  // This will ask if all the hiden numbers are true then ask if its the right randomTrueOrFalse
+  // Then set the gameState to win and chance the bgColor to light green or purple
+ 
+  if (firstNum && thirdNum && fifthNum && seventhNum && ninthNum && randomTrueOrFalse){
+    gameState = "win";
+    bgColor = "lightgreen";
+  }
+  
+  if (secondNum && fourthNum && sixthNum && eighthNum && !randomTrueOrFalse){
+    gameState = "win";
+    bgColor = "purple";
+  }
+}
 
-  if (randomBoards[randomPick+numToAddToRandomPick][row] === 1){
-    return 49;
-  }
-  if (randomBoards[randomPick+numToAddToRandomPick][row] === 2){
-    return 50;
-  }
+
+function mouseWheel(event) {
+  // Making a function that changes the numSize based on the mouse wheel going up or down
+
+  if (event.delta > 0) {
+    numSize -= 2;
+  } 
   else{
-    return 51;
+    numSize += 2;
   }
+}
+
+
+function displayWinText(){
+  // This displays the end text
+
+  textSize(65);
+  text("You Win, Nice Job", windowWidth/3, windowHeight/2);
 }
