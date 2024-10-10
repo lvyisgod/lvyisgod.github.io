@@ -14,15 +14,15 @@ function setup() {
   }
 
   // create a new bubble every second
-  window.setInterval(spawnBubble, 10);
+  window.setInterval(spawnBubble, 500);
 }
 
 function draw() {
   background(0);
-  // moveBubblesRandomly();
-  moveBubbleWithNoise();
+  moveBubblesRandomly();
+  // moveBubbleWithNoise();
   displayBubbles();
-  displayGraves();
+  // displayGraves();
 }
 
 function displayGraves(){
@@ -81,7 +81,7 @@ function displayBubbles(){
 }
 
 function moveBubblesRandomly(){
-  for (let bubble in theBubbles){
+  for (let bubble of theBubbles){
     let choice = random(100);
     if (choice < 50){
       // move up
