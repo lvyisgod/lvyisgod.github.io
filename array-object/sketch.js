@@ -40,8 +40,8 @@ function suffleDeck(){
   deck = deck.sort(() => 0.5 - Math.random());
 }
 
-function putCardsOnTable(){
-  for(let cards = 1; cards > 7; card++){
+// function putCardsOnTable(){
+//   for(let cards = 1; cards > 7; card++){
     
-  }
-}
+//   }
+// }
