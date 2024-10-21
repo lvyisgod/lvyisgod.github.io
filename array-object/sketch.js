@@ -22,8 +22,6 @@ function setup() {
   makeDeck();
   suffleDeck();
   putCardsOnTable();
-  console.log(deck);
-  console.log(cardsOnTable);
 }
 
 function draw() {
@@ -43,9 +41,10 @@ function suffleDeck(){
 }
 
 function putCardsOnTable(){
-  for(let listnum = 0; listnum < cardsOnTable.length - 1; listnum++){
-    for(let card = 0; card < cardsOnTable[listnum].length ; card++){
-      cardsOnTable[listnum].splice(card, card, deck[0]);
+  for(let listnum of cardsOnTable){
+    for(let card = 0; card < listnum.length ; card++){
+      listnum.pop();
+      listnum.unshift(deck[0]);
       deck.shift();
     }
   }
