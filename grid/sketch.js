@@ -10,8 +10,9 @@
 
 // If tring to randomize it use this
 let grid;
-const GRID_SIZE = 4;
+const GRID_SIZE = 15;
 let cellSize;
+let shouldToggleNeigbours = true;
 
 function setup() {
   if (windowWidth < windowHeight){
@@ -51,6 +52,9 @@ function keyPressed(){
   if (key === "e"){
     grid = makeEmptyGrid(GRID_SIZE, GRID_SIZE);
   }
+  if (key === "n"){
+    shouldToggleNeigbours = !shouldToggleNeigbours;
+  }
 }
 
 function generateRandomGrid(cols, rows) {
@@ -81,16 +85,36 @@ function makeEmptyGrid(cols, rows) {
   return newGrid;
 }
 
+function toggleCell(x, y){
+  if (x >= 0 && y >= 0 && x < GRID_SIZE && y < GRID_SIZE){
+    if (grid[y][x] === 1){
+      grid[y][x] = 0;
+    }
+    else{
+      grid[y][x] = 1;
+    }
+  }
+}
 function mousePressed(){
-  let xCord = mouseX/cellSize;
-  let yCord = mouseY/cellSize;
+  let xCord = Math.floor(mouseX/cellSize);
+  let yCord = Math.floor(mouseY/cellSize);
 
-  let xCord2 = mouseX/cellSize + 50;
+  toggleCell(xCord, yCord);
 
-  if (grid[yCord][xCord] === 1){
-    grid[yCord][xCord] === 0;
+  if (shouldToggleNeigbours){
+    toggleCell(xCord + 1, yCord);
+    toggleCell(xCord - 1, yCord);
+    toggleCell(xCord, yCord + 1);
+    toggleCell(xCord, yCord - 1);
+  }
+}
+
+function windowResize(){
+  if (windowWidth < windowHeight){
+    resizeCanvas(windowWidth, windowWidth);
   }
   else{
-    grid[yCord][xCord] === 1;
+    resizeCanvas(windowHeight, windowHeight); 
   }
+  cellSize = width/GRID_SIZE;
 }
