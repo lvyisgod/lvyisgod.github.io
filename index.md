@@ -10,7 +10,10 @@
 - [Terrain Generation](terrain)
 - [Bubble Object Demo](bubble)
 - [Grid Demo](grid)
+- [Game-of life](game-of-life)
+- [Rectangle Grid](rectangle-grid)
 
 ## Projects
 - [Interactive Scene](interactive-scene)
 - [Arrays and Object Notation](array-object)
+- [Grid Based Game](grid-based-game)
