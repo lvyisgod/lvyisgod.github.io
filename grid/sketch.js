@@ -41,7 +41,7 @@ function displayGrid(){
       else{
         fill("lightpink");
       }
-      square(x * cellSize, y* cellSize, cellSize);
+      square(x * cellSize, y* cellSize, cellSize/2);
     }
   }
 }
