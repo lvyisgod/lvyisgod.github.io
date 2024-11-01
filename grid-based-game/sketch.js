@@ -6,11 +6,12 @@
 // - describe what you did to take this project "above and beyond"
 
 let gameBoard = [];
+let outsideGameBoard = [];
 let gridsize;
 let cellSize;
 let input;
-let p = 0;
 let gameState = "startSceen";
+let maxNumber;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -46,6 +47,7 @@ function printWO(){
     removeElements();
     generateRandomGameBoard();
     gameState = "gameScreen";
+    findSquares();
   }
   else{
     removeElements();
@@ -66,26 +68,29 @@ function displayGameBoard(){
   for (let y = 0; y < gridsize; y++){
     for (let x = 0; x < gridsize; x++){
       if (gameBoard[y][x] === 0){
-        fill("red");
+        fill("darkblue");
       }
       else if (gameBoard[y][x] === 1){
-        fill("black");
+        fill("lightpink");
       }
       square(x * cellSize, y * cellSize, cellSize);
     }
   }
 }
 
-function displayGrid(){
-  for(let y = 0; y < GRID_SIZE; y++){
-    for(let x = 0; x < GRID_SIZE; x++){
-      if (grid[y][x] === 1){
-        fill("darkblue");
-      }
-      else{
-        fill("lightpink");
-      }
-      square(x+cellSize * cellSize, y * cellSize, cellSize);
+function findSquares(){
+  maxNumber = Math.ceil(gridsize/2);
+  let counter = 0;
+  for (let i = 0; i < gridsize; i++){
+    outsideGameBoard.push([]);
+  }
+  for (let x = 0; x < gridsize; x++){
+    if (gameBoard[0][x] === 0){
+      counter += 1;
+    }
+    else{
+      outsideGameBoard[0].push(counter);
+      counter = 0;
     }
   }
 }

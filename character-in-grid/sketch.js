@@ -87,7 +87,7 @@ function keyPressed(){
     movePlayer(player.x - 1, player.y);
   }
   if (key === "d"){
-    movePlayer(player.x + 1, player.y);
+    swmovePlayer(player.x + 1, player.y);
   }
 }
 
