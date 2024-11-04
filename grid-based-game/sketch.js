@@ -84,13 +84,21 @@ function findSquares(){
   for (let i = 0; i < gridsize; i++){
     outsideGameBoard.push([]);
   }
+
   for (let x = 0; x < gridsize; x++){
-    if (gameBoard[0][x] === 0){
+    console.log(gameBoard[0][x]);
+    console.log(counter);
+    if (gameBoard[0][x] === 1){
       counter += 1;
     }
-    else{
-      outsideGameBoard[0].push(counter);
+    else if (gameBoard[0][x] === 0){
       counter = 0;
+    }
+    outsideGameBoard[0].push(counter);
+  }
+  for (let i = 0; i < gameBoard[0].length; i++){
+    if (gameBoard[0][i] < gameBoard[0][i+1]){
+      gameBoard[0].splice(i, 1);
     }
   }
 }
