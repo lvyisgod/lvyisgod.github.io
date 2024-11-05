@@ -42,7 +42,7 @@ function draw() {
 
 function printWO(){
   if (input.value() > 1 && input.value() < 8 && input.value() !== ''){
-    gridsize = input.value();
+    gridsize = Number(input.value());
     cellSize = height/gridsize/1.5;
     removeElements();
     generateRandomGameBoard();
@@ -68,10 +68,10 @@ function displayGameBoard(){
   for (let y = 0; y < gridsize; y++){
     for (let x = 0; x < gridsize; x++){
       if (gameBoard[y][x] === 0){
-        fill("darkblue");
+        fill("red");
       }
       else if (gameBoard[y][x] === 1){
-        fill("lightpink");
+        fill("green");
       }
       square(x * cellSize, y * cellSize, cellSize);
     }
@@ -87,18 +87,22 @@ function findSquares(){
 
   for (let x = 0; x < gridsize; x++){
     console.log(gameBoard[0][x]);
-    console.log(counter);
     if (gameBoard[0][x] === 1){
       counter += 1;
     }
-    else if (gameBoard[0][x] === 0){
+    else if (gameBoard[0][x] === 0 && counter > 0){
+      console.log(counter);
+      outsideGameBoard[0].push(counter);
       counter = 0;
     }
-    outsideGameBoard[0].push(counter);
+    else if (x === gridsize-1 && counter > 0){
+      console.log(counter);
+      outsideGameBoard[0].push(counter);
+    }
   }
-  for (let i = 0; i < gameBoard[0].length; i++){
-    if (gameBoard[0][i] < gameBoard[0][i+1]){
-      gameBoard[0].splice(i, 1);
+  for (let i = 0; i < outsideGameBoard[0].length; i++){
+    if (outsideGameBoard[0][i] < outsideGameBoard[0][i+1] || outsideGameBoard[0][i] === 0){
+      outsideGameBoard[0].splice(i, 1);
     }
   }
 }
