@@ -80,7 +80,7 @@ function displayGameBoard(){
 
 function findSquares(){
   maxNumber = Math.ceil(gridsize/2);
-  for (let i = 0; i < gridsize; i++){
+  for (let i = 0; i < gridsize*2; i++){
     outsideGameBoard.push([]);
   }
 
@@ -102,5 +102,20 @@ function findSquares(){
     }
   }
 
-  console.log(outsideGameBoard);
+  for (let x  = 0; x < gridsize; x++){
+    let counter = 0;
+
+    for (let y = 0; y < gridsize; y++){
+      if (gameBoard[y][x] === 1){
+        counter += 1;
+      }
+      else if (gameBoard[y][x] === 0 && counter > 0){
+        outsideGameBoard[x + gridsize].push(counter);
+        counter = 0;
+      }
+      if (y === gridsize-1 && counter > 0){
+        outsideGameBoard[x + gridsize].push(counter);
+      }
+    }
+  }
 }

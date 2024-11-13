@@ -13,6 +13,7 @@
 - [Game-of life](game-of-life)
 - [Rectangle Grid](rectangle-grid)
 - [Character Movement](character-in-grid)
+- [Walker OOP](walker-oop)
 
 ## Projects
 - [Interactive Scene](interactive-scene)
