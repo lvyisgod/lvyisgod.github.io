@@ -14,6 +14,7 @@
 - [Rectangle Grid](rectangle-grid)
 - [Character Movement](character-in-grid)
 - [Walker OOP](walker-oop)
+- [Walker OOP Array](walker-oop-array)
 
 ## Projects
 - [Interactive Scene](interactive-scene)
