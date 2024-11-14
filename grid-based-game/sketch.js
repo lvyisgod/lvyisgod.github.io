@@ -12,6 +12,7 @@ let cellSize;
 let input;
 let gameState = "startSceen";
 let maxNumber;
+let strikes = 0;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -27,27 +28,85 @@ function draw() {
     textSize(50);
     text("Please type in a number for your grid size you have 10 seconds", 100, height/3);
     textSize(30);
-    text("please input a number that is smaller than 8 and bigger then 1", 300, height/2.5);
+    text("please input a number that is smaller than 8 and bigger then 3", 300, height/2.5);
   }
   else if (gameState === "gameScreen"){
-    background("white");
+    background("darkblue");
     displayGameBoard();
+    displayTheOutsideNumbers();
+    checkForWinOrLoss();
   }
   else if (gameState === "errorInputEntered"){
     background("red");
     textSize(50);
-    text("error number too small or too large or no number inputed", width/8, height/2);
+    text("error. number too small or too large or no number inputted", width/8, height/2);
+  }
+  else if (gameState === "win"){
+    background("white");
+  }
+  else if (gameState === "loss"){
+    background("black");
+  }
+}
+
+function checkForWinOrLoss(){
+  let isWon = true;
+  if (strikes > 3){
+    gameState = "loss"
+  }
+  for (let y = 0; y < gridsize; y++){
+    for (let x = 0; x < gridsize; x++){
+      if (gameBoard[y][x] === 1){
+        isWon = false;
+      }
+    }
+  }
+  if (isWon){
+    gameState = "win"
+  }
+}
+
+function mousePressed(){
+  let xCord = Math.floor(mouseX/cellSize);
+  let yCord = Math.floor(mouseY/cellSize);
+
+  toggleCell(xCord, yCord);
+}
+
+function toggleCell(x, y){
+  if (x >= 0 && y >= 0 && x < gridsize && y < gridsize){
+    if (gameBoard[y][x] === 1){
+      gameBoard[y][x] = 2;
+    }
+    else if (gameBoard[y][x] === 0){
+      gameBoard[y][x] = 3;
+      strikes += 1;
+    }
+  }
+}
+
+function displayTheOutsideNumbers(){
+  fill("black");
+
+  for (let y = 0; y < gridsize; y++){
+    text(outsideGameBoard[y], cellSize * gridsize + gridsize, cellSize*y + (cellSize/2))
+  }
+
+  for (let x = 0; x < gridsize; x++){
+    for (let y = 0; y < outsideGameBoard[x+gridsize].length; y++){
+      text(outsideGameBoard[x+gridsize][y], cellSize*x+25, cellSize * gridsize + cellSize/2 + (cellSize*y)/2)
+    }
   }
 }
 
 function printWO(){
-  if (input.value() > 1 && input.value() < 8 && input.value() !== ''){
+  if (input.value() > 3 && input.value() < 10 && input.value() !== ''){
     gridsize = Number(input.value());
     cellSize = height/gridsize/1.5;
     removeElements();
     generateRandomGameBoard();
-    gameState = "gameScreen";
     findSquares();
+    gameState = "gameScreen";
   }
   else{
     removeElements();
@@ -68,10 +127,16 @@ function displayGameBoard(){
   for (let y = 0; y < gridsize; y++){
     for (let x = 0; x < gridsize; x++){
       if (gameBoard[y][x] === 0){
-        fill("red");
+        fill("grey");
       }
       else if (gameBoard[y][x] === 1){
+        fill("grey");
+      }
+      else if (gameBoard[y][x] === 2){
         fill("green");
+      }
+      else {
+        fill("red");
       }
       square(x * cellSize, y * cellSize, cellSize);
     }
