@@ -15,6 +15,7 @@
 - [Character Movement](character-in-grid)
 - [Walker OOP](walker-oop)
 - [Walker OOP Array](walker-oop-array)
+- [Fireworks OOP Demo](fireworks-oop)
 
 ## Projects
 - [Interactive Scene](interactive-scene)
